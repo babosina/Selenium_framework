@@ -1,0 +1,10 @@
+*./idea
+*venv/
+*.pyd
+*.dll
+*.exe
+.idea/misc.xml
+.idea/modules.xml
+.idea/Selenium_framework.iml
+.idea/vcs.xml
+.idea/workspace.xml
