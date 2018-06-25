@@ -1,9 +1,11 @@
-from selenium import webdriver
+# from selenium import webdriver
+from base.selenium_driver import SeleniumDriver
 
 
-class LoginPage:
+class LoginPage(SeleniumDriver):
 
     def __init__(self, driver):
+        super().__init__(driver)
         self.driver = driver
 
     # Locators
