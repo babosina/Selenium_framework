@@ -16,11 +16,9 @@ class LoginTest(unittest.TestCase):
 
         lp.login("test@email.com", "abcabc")
 
-        user_icon = driver.find_element_by_xpath(".//div[@id='navbar']//span[text()='Test User']")
-        if user_icon is not None:
-            print("Login Successful")
-        else:
-            print("Login Failed")
+        result = lp.verify_login_success()
+
+        assert result == True
 
         driver.quit()
 

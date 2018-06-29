@@ -39,3 +39,11 @@ class LoginPage(SeleniumDriver):
         self.enter_email(username)
         self.enter_pwd(pwd)
         self.click_login_btn()
+
+    def verify_login_success(self):
+        result = self.is_element_present(".//div[@id='navbar']//span[text()='Test User']",
+                                         by_type="xpath")
+        return result
+
+    def verify_login_failed(self):
+        pass
