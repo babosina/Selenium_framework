@@ -1,8 +1,12 @@
 # from selenium import webdriver
+import utilities.custom_logger as cl
 from base.selenium_driver import SeleniumDriver
+import logging
 
 
 class LoginPage(SeleniumDriver):
+
+    log = cl.custom_logger(logging.DEBUG)
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -13,18 +17,6 @@ class LoginPage(SeleniumDriver):
     _email_input = "user_email"
     _pwd_input = "user_password"
     _login_btn = "commit"
-
-    # def get_login_link(self):
-    #     return self.driver.find_element_by_link_text(self._login_link)
-    #
-    # def get_email_input(self):
-    #     return self.driver.find_element_by_id(self._email_input)
-    #
-    # def get_pwd_input(self):
-    #     return self.driver.find_element_by_id(self._pwd_input)
-    #
-    # def get_login_btn(self):
-    #     return self.driver.find_element_by_name(self._login_btn)
 
     def click_login_link(self):
         # self.get_login_link().click()

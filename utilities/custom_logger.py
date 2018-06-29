@@ -14,7 +14,7 @@ def custom_logger(log_level=logging.DEBUG):
     #     ch.setFormatter(ch_format)
     #     logger.addHandler(ch)
 
-    fh = logging.FileHandler('{}.log'.format(logger_name))
+    fh = logging.FileHandler("automation.log", mode='a')
     fh.setLevel(log_level)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s: %(message)s',
                                   datefmt='%m/%d/%Y %I:%M:%S %p')
