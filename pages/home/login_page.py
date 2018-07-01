@@ -34,7 +34,7 @@ class LoginPage(SeleniumDriver):
         # self.get_login_btn().click()
         self.element_click(self._login_btn, locator_type="name")
 
-    def login(self, username, pwd):
+    def login(self, username='', pwd=''):
         self.click_login_link()
         self.enter_email(username)
         self.enter_pwd(pwd)
@@ -46,4 +46,6 @@ class LoginPage(SeleniumDriver):
         return result
 
     def verify_login_failed(self):
-        pass
+        result = self.is_element_present("//div[contains(text(),'Invalid email or password')]",
+                                         by_type="xpath")
+        return result
