@@ -11,11 +11,17 @@ class LoginTest(unittest.TestCase):
     def class_setup(self, set_up_once):
         self.lp = LoginPage(self.driver)
 
+    # Need to verify two vefirication points
+    # 1 fails, code will not go to the next verification point
+    # If assert fails, is stops current test execution and
+    # moves to the next method
     @pytest.mark.run(order=2)
     def test_valid_login(self):
         self.lp.login("test@email.com", "abcabc")
-        result = self.lp.verify_login_success()
-        assert result == True
+        result1 = self.lp.verify_title()
+        assert result1 == True
+        result2 = self.lp.verify_login_success()
+        assert result2 == True
 
     @pytest.mark.run(order=1)
     def test_invalid_login(self):
