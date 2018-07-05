@@ -5,7 +5,7 @@ self.check_point.mark_final("Test Name', result, 'Message'
 """
 import logging
 import utilities.custom_logger as cl
-from base import selenium_driver as SeleniumDriver
+from base.selenium_driver import SeleniumDriver
 
 
 class TestStatus(SeleniumDriver):
@@ -30,10 +30,10 @@ class TestStatus(SeleniumDriver):
                     self.log.info("Verification Failed :: ", result_message)
             else:
                 self.result_list.append("FAILED")
-                self.log.info("Verification Failed :: ", result_message)
+                self.log.error("Verification Failed :: ", result_message)
         except:
             self.result_list.append("FAILED")
-            self.log.info("Exception Occurred !!!")
+            self.log.error("Exception Occurred !!!")
 
     def mark(self, result, result_message):
         """
@@ -47,4 +47,13 @@ class TestStatus(SeleniumDriver):
         Needs to be called at least once in a test case
         Should be final test status of the test case
         """
-        print()
+        self.set_result(result, result_message)
+
+        if "FAIL" in self.result_list:
+            self.log.error(test_name, " Test FAILED!!!")
+            self.result_list.clear()
+            assert True == False
+        else:
+            self.log.info(test_name, " Test SUCCESSFUL")
+            self.result_list.clear()
+            assert True == True

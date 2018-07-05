@@ -1,4 +1,5 @@
 from selenium import webdriver
+from utilities.test_status import TestStatus
 from pages.home.login_page import LoginPage
 import unittest
 import pytest
@@ -10,6 +11,7 @@ class LoginTest(unittest.TestCase):
     @pytest.fixture(autouse=True)
     def class_setup(self, set_up_once):
         self.lp = LoginPage(self.driver)
+        self.ts = TestStatus(self.driver)
 
     # Need to verify two vefirication points
     # 1 fails, code will not go to the next verification point
@@ -19,9 +21,11 @@ class LoginTest(unittest.TestCase):
     def test_valid_login(self):
         self.lp.login("test@email.com", "abcabc")
         result1 = self.lp.verify_title()
-        assert result1 == True
+        self.ts.mark(result1, "Title is incorrect")
+        # assert result1 == True
         result2 = self.lp.verify_login_success()
-        assert result2 == True
+        self.ts.mark_final("test_valid_login", result2, "Login not successful")
+        # assert result2 == True
 
     @pytest.mark.run(order=1)
     def test_invalid_login(self):
